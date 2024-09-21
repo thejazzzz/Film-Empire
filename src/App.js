@@ -1,23 +1,25 @@
-import './App.css';
+import React, { useState, useEffect } from "react";
 
-const PersonDetails = (props) => {
-  return(
-  <>
-  <h1>Name : {props.name}</h1>
-  <h1>Last Name : {props.last}</h1>
-  <h1>Age : {props.age}</h1>
-  </>
-);}
+import SearchIcon from "./search.svg";
+import "./App.css";
+const API_URL = 'http://www.omdbapi.com?apikey=1f8f7bc3'
+
 const App = () => {
+    const searchMovies = async (title) => {
+        const response  = await fetch(`${API_URL}&s=${title}`)
+        const data = await response.json();
 
-  return (
-    <div className="App">
-      <PersonDetails
-        name ={'Jibii'}
-        last = {'Thomas'}
-        age = {29}/>
-    </div>
-  );
+        console.log(data.Search)
+
+    }
+
+    useEffect(()=> {
+        searchMovies('Spiderman')
+    },[])
+    return(
+        <h1>App</h1>
+
+    );
 }
 
-export default App;
+export default App
